@@ -12,6 +12,9 @@ package com.mycompany.car.rent;
 public class CarRent {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        //Vehiculo v1 = new Vehiculo("", "","",0,"");
+        Cliente cliente = new Cliente("12345678-5", "Juanito Peres");
+        //cliente.deshabilitarCliente();
+        System.out.println(cliente.toString());
     }
 }

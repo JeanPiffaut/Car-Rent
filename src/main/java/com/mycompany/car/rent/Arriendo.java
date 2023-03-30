@@ -14,19 +14,32 @@ public final class Arriendo {
     private GregorianCalendar fecha_arriendo;
     private int dias;
     private Vehiculo vehiculo;
+    private Cliente cliente;
     // OJO QUE FALTA LA RELACIÓN CON EL CLIENTE
     
-    public Arriendo(int numero, GregorianCalendar fecha_arriendo, int dias, Vehiculo vehiculo) {
+    public Arriendo(int numero, GregorianCalendar fecha_arriendo, int dias, Vehiculo vehiculo, Cliente cliente) {
         setNumero(numero);
         setFechaArriendo(fecha_arriendo);
         setDias(dias);
         setVehiculo(vehiculo);
+        setCliente(cliente);
         
         // LO NIEGO, YA QUE SI ES VÁLIDO EL MÉTODO ENTRARÁ A LA CONDICIÓN Y GATILLARÁ EL ERROR
         // POR LO QUE AL NEGARLO, EL TRUE LLEGA A SER FALSE Y EL FALSE LLEGA A SER TRUE
         if (!validarArriendo()) {
             throw new IllegalArgumentException("VEHICULO Ó CLIENTE INVÁLIDOS");
         }
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        if (!cliente.isVigente()) {
+            throw new IllegalArgumentException("El cliente ingresado no es válido.");
+        }
+        this.cliente = cliente;
     }
 
     /**
