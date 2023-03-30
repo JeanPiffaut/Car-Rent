@@ -4,8 +4,6 @@
  */
 package com.mycompany.car.rent;
 
-import javax.naming.directory.InvalidAttributesException;
-
 /**
  *
  */
@@ -14,7 +12,7 @@ public final class Vehiculo {
     private String marca;
     private String modelo;
     private int anho;
-    private String condicion;
+    private char condicion;
 
     public Vehiculo(String patente, String marca, String modelo, int anho) {
         setPatente(patente);
@@ -64,7 +62,7 @@ public final class Vehiculo {
         this.anho = anho;
     }
 
-    public String getCondicion() {
+    public char getCondicion() {
         return condicion;
     }
 
@@ -76,6 +74,14 @@ public final class Vehiculo {
             throw new IllegalArgumentException("El tipo de condición no es valido.");
         }
         
-        this.condicion = condicion_upper;
+        this.condicion = condicion_upper.charAt(0);
+    }
+    
+    @Override
+    public String toString() {
+        return "PATENTE: " + getPatente() + "\t" +
+                "MODELO: " + getModelo() + "\t" +
+                "MARCA: " + getMarca() + "\t" +
+                "CONDICION: " + getCondicion();
     }
 }
