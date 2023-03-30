@@ -6,7 +6,6 @@ package com.mycompany.car.rent;
 
 /**
  *
- * @author piffa
  */
 public class Cliente {
     

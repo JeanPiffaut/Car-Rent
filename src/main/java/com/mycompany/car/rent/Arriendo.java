@@ -8,9 +8,8 @@ import java.util.GregorianCalendar;
 
 /**
  *
- * @author Tom
  */
-public class Arriendo {
+public final class Arriendo {
     private int numero;
     private GregorianCalendar fechaArriendo;
     private int dias;
@@ -89,10 +88,6 @@ public class Arriendo {
     
     private boolean validarArriendo() {
         // OJO VALIDAR LA VIGENCIA DEL CLIENTE
-        if (getVehiculo().getCondicion() != 'D') {
-            return false;
-        }
-        
-        return true;
+        return getVehiculo().getCondicion() == 'D';
     }
 }
