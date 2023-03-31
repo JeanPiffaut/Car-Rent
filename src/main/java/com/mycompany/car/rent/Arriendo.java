@@ -4,6 +4,7 @@
  */
 package com.mycompany.car.rent;
 
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 /**
@@ -13,20 +14,20 @@ public final class Arriendo {
     private int numero;
     private GregorianCalendar fecha_arriendo;
     private int dias;
+    private int monto;
     private Vehiculo vehiculo;
     private Cliente cliente;
     
-    public Arriendo(int numero, GregorianCalendar fecha_arriendo, int dias, Vehiculo vehiculo, Cliente cliente) {
+    public Arriendo(int numero, GregorianCalendar fecha_arriendo, int dias, int monto, Vehiculo vehiculo, Cliente cliente) {
         setNumero(numero);
         setFechaArriendo(fecha_arriendo);
         setDias(dias);
+        setMonto(monto);
         setVehiculo(vehiculo);
         setCliente(cliente);
         
-        // LO NIEGO, YA QUE SI ES VÁLIDO EL MÉTODO ENTRARÁ A LA CONDICIÓN Y GATILLARÁ EL ERROR
-        // POR LO QUE AL NEGARLO, EL TRUE LLEGA A SER FALSE Y EL FALSE LLEGA A SER TRUE
-        if (!validarArriendo()) {
-            throw new IllegalArgumentException("VEHICULO Ó CLIENTE INVÁLIDOS");
+        if (!evaluarArriendo()) {
+            throw new IllegalArgumentException("El vehiculo o el cliente no son validos");
         }
     }
 
@@ -56,8 +57,14 @@ public final class Arriendo {
      * @return the fecha_arriendo
      */
     public GregorianCalendar getFechaArriendo() {
-        return fecha_arriendo;
+        return this.fecha_arriendo;
     }
+    
+    public String getFechaFormateada() {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        return formatoFecha.format(getFechaArriendo().getTime());
+    }
+            
 
     /**
      * @param fecha_arriendo the fecha_arriendo to set
@@ -88,6 +95,14 @@ public final class Arriendo {
         return vehiculo;
     }
 
+    public int getMonto() {
+        return monto;
+    }
+
+    public void setMonto(int monto) {
+        this.monto = monto;
+    }
+
     /**
      * @param vehiculo the vehiculo to set
      */
@@ -95,7 +110,37 @@ public final class Arriendo {
         this.vehiculo = vehiculo;
     }
     
-    private boolean validarArriendo() {
-        return !(!this.cliente.isVigente() && getVehiculo().getCondicion() == 'D');
+    private boolean evaluarArriendo() {
+        return !(!getCliente().isVigente() && getVehiculo().getCondicion() == 'D');
+    }
+    
+    public boolean ingresarArriendo() {
+        if (evaluarArriendo()) {
+            getVehiculo().setCondicion("A");
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public int obtenerMontoPagar() {
+        return getDias() * getMonto();
+    }
+    
+    public void generarTicket() {
+        String ticket = "              ARRIENDO DE VEHÍCULO          \n" +
+               "              NUMERO ARRIENDO: " + getNumero() + "\n"+
+               "              VEHICULO: " + getVehiculo().getPatente() +" "+ getVehiculo().getMarca() +" "+ getVehiculo().getModelo() + "\n"+
+               "              PRECIO DIARIO: " + getMonto()+ "\n"+
+               "---------------------------------------------\n" +
+               "| Fecha      | Cliente       | Días | Pagar |\n" +
+               "---------------------------------------------\n" +
+               "| " + getFechaFormateada() + " | " + getCliente().getNombre() + " |  " + getDias() + "   | $" + obtenerMontoPagar() + " |\n" +
+               "---------------------------------------------\n" +
+               "                                             \n" + 
+               "                               ______________\n" + 
+               "                               FIRMA CLIENTE ";
+        
+        System.out.println(ticket);
     }
 }
