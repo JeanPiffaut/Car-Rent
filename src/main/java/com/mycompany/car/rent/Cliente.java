@@ -80,8 +80,8 @@ public final class Cliente {
     
     @Override
     public String toString() {
-        return "CEDULA: " + getCedula() + "\t"
-                + "NOMBRE: " + getNombre() + "\t"
-                + "ES VALIDO: " + isVigente();
+        return "CEDULA: " + getCedula() + "\t" + 
+               "NOMBRE: " + getNombre() + "\t" + 
+               "ES VALIDO: " + isVigente();
     }
 }

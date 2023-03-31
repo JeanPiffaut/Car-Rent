@@ -69,8 +69,8 @@ public final class Vehiculo {
     public void setCondicion(String condicion) {
         String condicion_upper = condicion.toUpperCase();
         if (!"D".equals(condicion_upper) 
-                || !"A".equals(condicion_upper) 
-                || !"M".equals(condicion_upper)) {
+                && !"A".equals(condicion_upper) 
+                && !"M".equals(condicion_upper)) {
             throw new IllegalArgumentException("El tipo de condición no es valido.");
         }
         
@@ -80,8 +80,8 @@ public final class Vehiculo {
     @Override
     public String toString() {
         return "PATENTE: " + getPatente() + "\t" +
-                "MODELO: " + getModelo() + "\t" +
-                "MARCA: " + getMarca() + "\t" +
-                "CONDICION: " + getCondicion();
+               "MODELO: " + getModelo() + "\t" +
+               "MARCA: " + getMarca() + "\t" +
+               "CONDICION: " + getCondicion();
     }
 }
