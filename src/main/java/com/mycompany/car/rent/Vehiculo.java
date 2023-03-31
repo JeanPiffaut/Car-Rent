@@ -80,8 +80,8 @@ public final class Vehiculo {
     @Override
     public String toString() {
         return "PATENTE: " + getPatente() + "\t" +
-                "MODELO: " + getModelo() + "\t" +
-                "MARCA: " + getMarca() + "\t" +
-                "CONDICION: " + getCondicion();
+               "MODELO: " + getModelo() + "\t" +
+               "MARCA: " + getMarca() + "\t" +
+               "CONDICION: " + getCondicion();
     }
 }

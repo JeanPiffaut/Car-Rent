@@ -15,7 +15,6 @@ public final class Arriendo {
     private int dias;
     private Vehiculo vehiculo;
     private Cliente cliente;
-    // OJO QUE FALTA LA RELACIÓN CON EL CLIENTE
     
     public Arriendo(int numero, GregorianCalendar fecha_arriendo, int dias, Vehiculo vehiculo, Cliente cliente) {
         setNumero(numero);
@@ -36,9 +35,6 @@ public final class Arriendo {
     }
 
     public void setCliente(Cliente cliente) {
-        if (!cliente.isVigente()) {
-            throw new IllegalArgumentException("El cliente ingresado no es válido.");
-        }
         this.cliente = cliente;
     }
 
@@ -100,7 +96,6 @@ public final class Arriendo {
     }
     
     private boolean validarArriendo() {
-        // OJO VALIDAR LA VIGENCIA DEL CLIENTE
-        return getVehiculo().getCondicion() == 'D';
+        return !(!this.cliente.isVigente() && getVehiculo().getCondicion() == 'D');
     }
 }
