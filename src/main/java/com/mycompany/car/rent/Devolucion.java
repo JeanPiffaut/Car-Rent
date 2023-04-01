@@ -33,4 +33,10 @@ public final class Devolucion {
     public void setArriendo(Arriendo arriendo) {
         this.arriendo = arriendo;
     }
+    
+    @Override
+    public String toString() {
+        return "ARRIENDO: " + getArriendo() + "\t" +
+               "FECHA DEVOLUCIÓN: " + getFechaDevolucion() + "\t" ;
+    }
 }

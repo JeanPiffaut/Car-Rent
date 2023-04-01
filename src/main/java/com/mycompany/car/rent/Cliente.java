@@ -75,7 +75,7 @@ public final class Cliente {
      */
     public void deshabilitarCliente() {
         setVigente(false);
-        System.out.println("Cliente " + getCedula() + " deshabilitado.");
+        System.out.println("Cliente " + getCedula() + " deshabilitado. \n");
     }
     
     @Override

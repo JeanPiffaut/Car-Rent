@@ -128,7 +128,9 @@ public final class Arriendo {
     }
     
     public void generarTicket() {
-        String ticket = "              ARRIENDO DE VEHÍCULO          \n" +
+        String ticket = 
+               "---------------------------------------------\n" +
+               "              ARRIENDO DE VEHÍCULO          \n" +
                "              NUMERO ARRIENDO: " + getNumero() + "\n"+
                "              VEHICULO: " + getVehiculo().getPatente() +" "+ getVehiculo().getMarca() +" "+ getVehiculo().getModelo() + "\n"+
                "              PRECIO DIARIO: " + getMonto()+ "\n"+
@@ -139,7 +141,7 @@ public final class Arriendo {
                "---------------------------------------------\n" +
                "                                             \n" + 
                "                               ______________\n" + 
-               "                               FIRMA CLIENTE ";
+               "                               FIRMA CLIENTE \n\n";
         
         System.out.println(ticket);
     }
