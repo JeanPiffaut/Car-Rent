@@ -34,6 +34,22 @@ public final class Devolucion {
         this.arriendo = arriendo;
     }
     
+   public void ingresarDevolucion(Arriendo arriendo) {
+        int dif = aplicaMulta();
+        if(dif==0){
+            this.arriendo.getVehiculo().setCondicion("D");
+            System.out.println("Devolución vehiculo: " + this.arriendo.getVehiculo() + " OK. \n");
+        }else{
+            int montoMulta = (this.arriendo.getMonto() * dif) - this.arriendo.obtenerMontoPagar();
+            System.out.println("Vehiculo: " + this.arriendo.getVehiculo() + " con " + dif + " días de multa: $" + montoMulta + ", favor actualizar contrato de arriendo. \n");
+        }
+    }
+    
+    public int aplicaMulta() {
+        //PENDIENTE: Determinar diferencia en dias entre "Fecha Arriendo" y "Fecha Devolucion".
+        return 1;
+    }
+    
     @Override
     public String toString() {
         return "ARRIENDO: " + getArriendo() + "\t" +
