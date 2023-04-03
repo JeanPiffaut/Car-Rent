@@ -123,6 +123,7 @@ public final class Vehiculo {
     
     /**
      * Asigna el vehiculo a la condicion de mantencion
+     * Imprime el estado del vehiculo
      */
     public void asignarVehiculoEnMantencion() {
         setCondicion("M");
