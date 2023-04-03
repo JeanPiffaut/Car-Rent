@@ -11,6 +11,7 @@ public final class Cliente {
     private String cedula;
     private String nombre;
     private boolean vigente;
+    
 
     public Cliente(String cedula, String nombre) {
         setCedula(cedula);
@@ -70,12 +71,13 @@ public final class Cliente {
         this.vigente = vigente;
     }
     
-    /**
-     * SE DEBE VERIFICAR QUER NO HAYAN ARRIENDOS ACTIVOS
-     */
-    public void deshabilitarCliente() {
-        setVigente(false);
-        System.out.println("Cliente " + getCedula() + " deshabilitado. \n");
+    public void deshabilitarCliente(Arriendo arriendo) {
+        if (arriendo.getVehiculo().getCondicion() != 'A') {
+            setVigente(false);
+            System.out.println("***** Cliente " + getCedula() + " deshabilitado. *****\n");   
+        } else {
+            throw new IllegalArgumentException("Cliente figura con arriendos activos.");
+        }
     }
     
     @Override

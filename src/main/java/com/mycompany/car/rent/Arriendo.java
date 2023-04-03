@@ -111,12 +111,13 @@ public final class Arriendo {
     }
     
     private boolean evaluarArriendo() {
-        return !(!getCliente().isVigente() && getVehiculo().getCondicion() == 'D');
+        return (getCliente().isVigente() && getVehiculo().getCondicion() == 'D');
     }
     
     public boolean ingresarArriendo() {
         if (evaluarArriendo()) {
             getVehiculo().setCondicion("A");
+            generarTicket();
             return true;
         } else {
             return false;
@@ -130,14 +131,14 @@ public final class Arriendo {
     public void generarTicket() {
         String ticket = 
                "---------------------------------------------\n" +
-               "              ARRIENDO DE VEHÍCULO          \n" +
+               "              ARRIENDO DE VEHÍCULO           \n" +
                "              NUMERO ARRIENDO: " + getNumero() + "\n"+
                "              VEHICULO: " + getVehiculo().getPatente() +" "+ getVehiculo().getMarca() +" "+ getVehiculo().getModelo() + "\n"+
                "              PRECIO DIARIO: " + getMonto()+ "\n"+
                "---------------------------------------------\n" +
                "| Fecha      | Cliente       | Días | Pagar |\n" +
                "---------------------------------------------\n" +
-               "| " + getFechaFormateada() + " | " + getCliente().getNombre() + " |  " + getDias() + "   | $" + obtenerMontoPagar() + " |\n" +
+               "| " + getFechaFormateada() + " | " + getCliente().getCedula() + " / " + getCliente().getNombre() + " |  " + getDias() + "   | $" + obtenerMontoPagar() + " |\n" +
                "---------------------------------------------\n" +
                "                                             \n" + 
                "                               ______________\n" + 

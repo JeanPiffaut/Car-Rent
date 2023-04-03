@@ -11,14 +11,14 @@ public final class Vehiculo {
     private String patente;
     private String marca;
     private String modelo;
-    private int anho;
+    private int anio_fabricacion;
     private char condicion;
 
     public Vehiculo(String patente, String marca, String modelo, int anho) {
         setPatente(patente);
         setMarca(marca);
         setModelo(modelo);
-        setAnho(anho);
+        setAnio_fabricacion(anho);
         setCondicion("D");
     }
 
@@ -50,16 +50,16 @@ public final class Vehiculo {
         this.modelo = modelo;
     }
 
-    public int getAnho() {
-        return anho;
+    public int getAnio_fabricacion() {
+        return anio_fabricacion;
     }
 
-    public void setAnho(int anho) {
-        if (anho < 2000) {
+    public void setAnio_fabricacion(int anio_fabricacion) {
+        if (anio_fabricacion < 2000) {
             throw new IllegalArgumentException("El año del vehiculo debe ser superior al 2000.");
         }
         
-        this.anho = anho;
+        this.anio_fabricacion = anio_fabricacion;
     }
 
     public char getCondicion() {
@@ -75,6 +75,10 @@ public final class Vehiculo {
         }
         
         this.condicion = condicion_upper.charAt(0);
+    }
+    
+    public void asignarVehiculoEnMantencion() {
+        setCondicion("M");
     }
     
     @Override
