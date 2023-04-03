@@ -17,13 +17,21 @@ public class CarRent {
         
         // A: crear clientes
         Cliente c1 = new Cliente("12345678-5", "Juanito Peres");
+        System.out.println("¿El cliente esta vigente? " + c1.isVigente());
+        
         Cliente c2 = new Cliente("10649515-7", "Carlos Peres");
+        System.out.println("¿El cliente esta vigente? " + c2.isVigente());
+        
         Cliente c3 = new Cliente("14359340-1", "Miguel Peres");
+        System.out.println("¿El cliente esta vigente? " + c3.isVigente());
         
         // B: crear vehiculos
         Vehiculo v1 = new Vehiculo("ASDCE-EE", "Honda","CR-V",2014);
+        System.out.println("El vehículo " + v1.getPatente() + " esta en condición: " + v1.getCondicion());
         Vehiculo v2 = new Vehiculo("ASDCE-EE", "Nissan","Rogue",2018);
+        System.out.println("El vehículo " + v2.getPatente() + " esta en condición: " + v2.getCondicion());
         Vehiculo v3 = new Vehiculo("ASDCE-EE", "Jeep","Cherokee",2015);
+        System.out.println("El vehículo " + v3.getPatente() + " esta en condición: " + v3.getCondicion());
         
         // E: ingresar 2 arriendos
         GregorianCalendar date1 = new GregorianCalendar(2023, 4, 05,10, 15);

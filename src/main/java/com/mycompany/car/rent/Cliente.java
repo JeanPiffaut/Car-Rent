@@ -18,10 +18,18 @@ public final class Cliente {
         setNombre(nombre);
     }
 
+    /**
+     * Retorna la cedula del cliente
+     * @return String
+     */
     public String getCedula() {
         return cedula;
     }
 
+    /**
+     * Asigna y valida que la cedula ingresada para el cliente, sea valida
+     * @param cedula 
+     */
     public void setCedula(String cedula) {
         boolean validacion = false;
         try {
@@ -55,26 +63,46 @@ public final class Cliente {
         }
     }
 
+    /**
+     * Retorna el nombre del cliente
+     * @return String
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Asigna el nombre del cliente
+     * @param nombre 
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Retorna si el cliente esta vigente
+     * @return boolean
+     */
     public boolean isVigente() {
         return vigente;
     }
 
+    /**
+     * Asigna si el cliente esta vigente
+     * @param vigente 
+     */
     public void setVigente(boolean vigente) {
         this.vigente = vigente;
     }
     
+    /**
+     * Deshabilita al cliente dependiendo de si el arriendo enviado por parametro no esta activo
+     * @param arriendo 
+     */
     public void deshabilitarCliente(Arriendo arriendo) {
         if (arriendo.getVehiculo().getCondicion() != 'A') {
             setVigente(false);
-            System.out.println("***** Cliente " + getCedula() + " deshabilitado. *****\n");   
+            System.out.println(toString());   
         } else {
             throw new IllegalArgumentException("Cliente figura con arriendos activos.");
         }

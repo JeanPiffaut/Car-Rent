@@ -20,57 +20,88 @@ public final class Devolucion {
         setArriendo(arriendo);
     }
 
+    /**
+     * Retorna la fecha de devolucion del vehiculo
+     * @return GregorianCalendar
+     */
     public GregorianCalendar getFechaDevolucion() {
         return fecha_devolucion;
     }
 
+    /**
+     * Asgina la fecha de devolucion del vehiculo
+     * @param fecha_devolucion 
+     */
     public void setFechaDevolucion(GregorianCalendar fecha_devolucion) {
         this.fecha_devolucion = fecha_devolucion;
     }
     
+    /**
+     * Retorna la fecha de devolucion con el formato dd/MM/yyyy
+     * @return String
+     */
     public String getFechaFormateada() {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         return formatoFecha.format(getFechaDevolucion().getTime());
     }
 
+    /**
+     * Retorna el objeto Arriendo asociado a la devolucion
+     * @return Arriendo
+     */
     public Arriendo getArriendo() {
         return arriendo;
     }
 
+    /**
+     * Asigna a la devolucion un arriendo
+     * @param arriendo 
+     */
     public void setArriendo(Arriendo arriendo) {
         this.arriendo = arriendo;
     }
 
-    public GregorianCalendar getFecha_devolucion() {
-        return fecha_devolucion;
-    }
-
-    public void setFecha_devolucion(GregorianCalendar fecha_devolucion) {
-        this.fecha_devolucion = fecha_devolucion;
-    }
-
+    /**
+     * Retorna el monto de multa que tiene la devolucion
+     * @return int
+     */
     public int getMontoMulta() {
         return monto_multa;
     }
 
+    /**
+     * Asigna el monto de la multa que tiene la devolucion
+     * @param monto_multa 
+     */
     public void setMontoMulta(int monto_multa) {
         this.monto_multa = monto_multa;
     }
     
+    /**
+     * Ingresa la devolucion al sistema
+     * Valida si el cliente y que el arriendo sean vigentes
+     * Calcula en base a la fecha de arriendo y la fecha de devolucion si es que se debe asignar una multa al cliente
+     */
     public void ingresarDevolucion() {
+        if ((getArriendo().getCliente().isVigente() == false && getArriendo().getVehiculo().getCondicion() != 'A')) {
+            throw new IllegalArgumentException("El cliente o el vehículo no es valido para una devolución");
+        }
+        
         int dif = calcularAtraso();
         if(dif==0){
             setMontoMulta(0);
-            this.arriendo.getVehiculo().setCondicion("D");
-            //System.out.println("Devolución vehiculo: " + this.arriendo.getVehiculo() + " OK. \n");
+            getArriendo().getVehiculo().setCondicion("D");
         }else{
-            setMontoMulta(this.arriendo.getMonto() * dif);
-            //System.out.println("Vehiculo: " + this.arriendo.getVehiculo() + " con " + dif + " días de multa: $" + getMontoMulta() + ", favor actualizar contrato de arriendo. \n");  
+            setMontoMulta(getArriendo().getMonto() * dif);
         }
         
         generarTicket();
     }
     
+    /**
+     * Calcula y retorna en base a la fecha de arriendo y devolucion la diferencia de dias
+     * @return int
+     */
     public int calcularAtraso() {
         long diferenciaEnMilisegundos = getFechaDevolucion().getTimeInMillis() - getArriendo().getFechaArriendo().getTimeInMillis();
         int dias = (int)(diferenciaEnMilisegundos / (24 * 60 * 60 * 1000));
@@ -80,12 +111,9 @@ public final class Devolucion {
         return diff;
     }
     
-    @Override
-    public String toString() {
-        return "ARRIENDO: " + getArriendo() + "\t" +
-               "FECHA DEVOLUCIÓN: " + getFechaDevolucion() + "\t" ;
-    }
-    
+    /**
+     * Imprime un ticket el cual contiene toda la informacion de la devolucion generado
+     */
     public void generarTicket() {       
         String ticket = 
                "---------------------------------------------\n" +
@@ -103,5 +131,12 @@ public final class Devolucion {
                "                               FIRMA CLIENTE \n\n";
         
         System.out.println(ticket);
+    }
+    
+    @Override
+    public String toString() {
+        return "ARRIENDO: " + getArriendo() + "\t" +
+               "FECHA DEVOLUCIÓN: " + getFechaDevolucion() + "\t" +
+               "MONTO MULTA: " + getMontoMulta()+ "\t";
     }
 }
